@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="CopyText1" onclick="execClick();" oncopy="execCopy(event,'CopyText1');">直接复制文字</div>
+<blockquote>
+<p id="CopyText2">
+通过点击按钮复制
+</p>
+<a onclick="execClick();" style="background-color:#f8a5c2;color:white;" oncopy="execCopy(event,'CopyText2');">复制</a>
+</blockquote>
+<script>
+function execClick(){
+    document.execCommand("copy");
+}
+function execCopy(event,CopyText){
+    var thisDiv = document.getElementById(CopyText);
+    if(isIE()){
+        if(window.clipboardData){
+            window.clipboardData.setData("Text", thisDiv.textContent);
+            window.clipboardData.getData("Text");
+            alert("复制成功da☆ze")
+        }
+    }else{
+        event.preventDefault();
+        if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", thisDiv.textContent);
+            event.clipboardData.getData("text");
+            alert("复制成功da☆ze")
+        }
+    }
+}
+function isIE(){
+    var input = window.document.createElement ("input");
+    if (window.ActiveXObject === undefined) return null;
+    if (!window.XMLHttpRequest) return 6;
+    if (!window.document.querySelector) return 7;
+    if (!window.document.addEventListener) return 8;
+    if (!window.atob) return 9;
+    if (!input.dataset) return 10;
+    return 11;
+}
+</script></body></html>
